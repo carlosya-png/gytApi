@@ -51,6 +51,7 @@ public class As400Service
                 {
                     error = true,
                     message = e.Message,
+                    trace = e.StackTrace,
                     detail = e.InnerException?.Message,
                     url= _http.BaseAddress
                 };
