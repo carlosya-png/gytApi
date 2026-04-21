@@ -51,7 +51,8 @@ public class As400Service
                 {
                     error = true,
                     message = e.Message,
-                    detail = e.InnerException?.Message
+                    detail = e.InnerException?.Message,
+                    url= _http.BaseAddress
                 };
         }
     }
