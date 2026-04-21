@@ -1,6 +1,7 @@
 
 
 
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using Microsoft.AspNetCore.Mvc;
@@ -33,13 +34,16 @@ public class TestController : ControllerBase
             
             var ping = new Ping();
             var reply = await ping.SendPingAsync(_baseUrl);
-
+            var host = Dns.GetHostName();
+            var ips = Dns.GetHostAddresses(host)
+                 .Where(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                 .Select(ip => ip.ToString());
             if (reply.Status == IPStatus.Success)
             {
                 return Ok(new { status = "OK", time = reply.RoundtripTime });
             }
 
-            return StatusCode(500, new { status = "FAIL" });
+            return StatusCode(500, new { status = "FAIL",myip= ips , host= _baseUrl });
         }
         catch (Exception ex)
         {
