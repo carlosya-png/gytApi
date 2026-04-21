@@ -47,7 +47,12 @@ public class As400Service
         }
         catch(Exception e)
         {
-            return e;
+             return new
+                {
+                    error = true,
+                    message = e.Message,
+                    detail = e.InnerException?.Message
+                };
         }
     }
 }
