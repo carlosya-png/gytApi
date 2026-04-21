@@ -14,6 +14,7 @@ public class As400Service
 
     public async Task<object> Cotizar(CotizacionDto request)
     {
+        try{
         var token = await _auth.GetToken();
 
         _http.DefaultRequestHeaders.Authorization =
@@ -43,5 +44,10 @@ public class As400Service
         response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadFromJsonAsync<object>();
+        }
+        catch(Exception e)
+        {
+            return e;
+        }
     }
 }
