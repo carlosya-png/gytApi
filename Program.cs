@@ -32,7 +32,7 @@ if (true)
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 
 app.MapGet("/", () => "API OK");
