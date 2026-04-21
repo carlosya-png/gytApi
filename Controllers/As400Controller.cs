@@ -14,7 +14,7 @@ public class TestController : ControllerBase
     public TestController(As400Service service,IConfiguration config)
     {
         _service = service;
-        _baseUrl = config["ExternalApi:BaseUrl"];
+        _baseUrl = config["ExternalApi:server"];
     }
 
     [HttpPost]
