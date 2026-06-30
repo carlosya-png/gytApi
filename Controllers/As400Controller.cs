@@ -4,6 +4,7 @@
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -21,7 +22,7 @@ public class TestController : ControllerBase
     [HttpPost] 
     public async Task<IActionResult> Test(CotizacionDto cotizacion)
     {
-        cotizacion.peSDPLCA=cotizacion.peSDPLCA.ToUpper();
+        cotizacion.peSDPLCA=Regex.Replace(cotizacion.peSDPLCA.ToUpper(), @"[^a-zA-Z0-9]", "");
         cotizacion.peFechaCons= DateTime.Now.ToString("yyyyMMdd");
         var result = await _service.Cotizar(cotizacion);
        
