@@ -22,7 +22,7 @@ public class TestController : ControllerBase
     public async Task<IActionResult> Test(CotizacionDto cotizacion)
     {
         cotizacion.peSDPLCA=cotizacion.peSDPLCA.ToUpper();
-        cotizacion.peFechaCons= DateTime.Now.ToString("YYYYmmdd");
+        cotizacion.peFechaCons= DateTime.Now.ToString("yyyyMMdd");
         var result = await _service.Cotizar(cotizacion);
        
         return Ok(result);
