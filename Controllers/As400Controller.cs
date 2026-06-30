@@ -18,7 +18,7 @@ public class TestController : ControllerBase
         _baseUrl = config["ExternalApi:server"];
     }
 
-    [HttpPost]
+    [HttpPost] 
     public async Task<IActionResult> Test(CotizacionDto cotizacion)
     {
         cotizacion.peSDPLCA=cotizacion.peSDPLCA.ToUpper();
