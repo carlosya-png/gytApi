@@ -25,7 +25,6 @@ public class As400Service
             request
         );
 
-        // si el token expiró
         if (response.StatusCode == HttpStatusCode.Unauthorized)
         {
             _auth.ClearToken();
@@ -42,8 +41,10 @@ public class As400Service
         }
 
         response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadFromJsonAsync<object>();
+        var resp= await response.Content.ReadFromJsonAsync<CotizacionResponse>();
+        decimal saldo = Convert.ToDecimal(resp.Data.PrSaldo, System.Globalization.CultureInfo.InvariantCulture);
+        resp.Data.PrSaldo=saldo.ToString();
+        return resp;
         }
         catch(Exception e)
         {

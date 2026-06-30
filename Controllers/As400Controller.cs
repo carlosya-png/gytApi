@@ -21,8 +21,9 @@ public class TestController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Test(CotizacionDto cotizacion)
     {
+        cotizacion.peSDPLCA=cotizacion.peSDPLCA.ToUpper();
         var result = await _service.Cotizar(cotizacion);
-
+       
         return Ok(result);
     }
 
